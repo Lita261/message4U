@@ -1,0 +1,204 @@
+:root{ 
+    --primary: #fff; 
+    --bg-color: rgb(219, 128, 143); 
+    --bg-envelope-color: #f5edd1;
+    --envelope-tab: #ecdeb8;
+    --envelope-cover: #e6cfa7;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --text-color: #444;
+    --heart-color: rgb(209, 9, 132); 
+}
+/* Reset */ 
+*{ 
+    box-sizing: border-box;
+}
+body{ 
+    margin: 0; 
+    height: 100vh; 
+    background: var(--bg-color); 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    position: relative; 
+}
+body::before{ 
+    content: ""; 
+    position: fixed; 
+    inset: 0; 
+    background-image: url(Valentine.jpg); 
+    background-size: cover; 
+    background-position: center; 
+    filter: blur(6px); 
+    z-index: -1; 
+}
+.container{ 
+    display: grid; 
+    place-items: center; 
+}
+/* Envelope Wrapper */ 
+.container > .enevelope-wrapper{ 
+    position: relative; 
+    background: var(--bg-envelope-color); 
+    box-shadow: 0 0 40px var(--shadow-color); 
+}
+/* Envelope Body */ 
+.envelope{ 
+    position: relative; 
+    width: 300px; 
+    height: 230px; 
+}
+/* Envelope Top Flap */ 
+.envelope::before{ 
+    content: ""; 
+    position: absolute; 
+    z-index: 2; 
+    border-top: 130px solid var(--envelope-tab); 
+    border-right: 150px solid transparent; 
+    border-left: 150px solid transparent; 
+    top: 0; 
+    transform-origin: top; 
+    transition: all 0.5s ease-in-out 0.7s; 
+}
+/* Envelope Bottom */
+.envelope::after{ 
+    content: ""; 
+    position: absolute; 
+    z-index: 2; 
+    border-top: 130px solid transparent; 
+    border-left: 150px solid var(--envelope-cover); 
+    border-right: 150px solid var(--envelope-cover); 
+    border-bottom: 100px solid var(--envelope-cover); 
+    bottom: 0; 
+}
+/* Envelope Body */
+.envelope { 
+    position: relative; 
+    width: 300px; 
+    height: 230px; 
+    background: var(--bg-envelope-color); 
+    box-shadow: 0 0 40px var(--shadow-color); 
+    border-radius: 10px; /* Optional: add rounded corners for a more 3D look */
+}
+
+/* Envelope Back (the missing part) */
+.envelope-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg-envelope-color);
+    border-radius: 10px;  /* Ensure it matches the envelope's radius */
+    z-index: 1;
+    transition: transform 1s ease-in-out; /* For smooth back animation */
+}
+
+/* Envelope Flap opening */
+.flap > .envelope::before {
+    z-index: 0; 
+    transform: rotateX(180deg);
+}
+
+.flap > .envelope-back {
+    transform: rotateX(-180deg); /* Flip the back part when opening */
+    transition-delay: 1s; /* Matches the flap animation delay */
+}
+
+/* Letter */ 
+.letter{ 
+    position: absolute; 
+    right: 20%; 
+    bottom: 0; 
+    width: 54%; 
+    height: 80%; 
+    background: var(--primary); 
+    padding: 20px 10px; 
+    box-shadow: 0 0 10px var(--shadow-color); 
+    transition: all 1s ease-in-out; 
+}
+.letter .text{ 
+    font-family: 'Times New Roman', Times, serif; 
+    font-size: 6px; 
+    color: var(--text-color);
+    font-weight: normal; 
+    text-align: center; 
+}
+/* Heart */ 
+.heart{ 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    width: 15px; 
+    height: 15px; 
+    background: var(--heart-color); 
+    transform: translate(-50%, -20%) rotate(45deg); 
+    transition: transform 0.5s ease-in-out 1s; 
+    z-index: 4; 
+    box-shadow: 0 0 10px var(--shadow-color); 
+    cursor: pointer; 
+}
+/* Heart circles */
+.heart::before, .heart::after{ 
+    content: ""; 
+    position: absolute; 
+    width: 15px; 
+    height: 15px; 
+    background: var(--heart-color); 
+    border-radius: 50%; 
+}
+.heart::before{ 
+    top: -7.5px; 
+} 
+.heart::after{
+     right: 7.5px; 
+}
+/* OPEN ANIMATION */ 
+/* Flap opens */ 
+.flap > .envelope::before{ 
+    z-index: 0; 
+    transform: rotateX(180deg); 
+}
+/* Letter comes out */ 
+.flap > .envelope .letter{ 
+    bottom: 100px; 
+    transform: scale(1.5); 
+    transition-delay: 1s; 
+}
+/* Heart rotates but keeps position */ 
+.flap > .heart{ 
+    transform: translate(-50%, -20%) rotate(90deg); 
+    transition-delay: 0.4s; 
+}
+/* ===== MOBILE FRIENDLY ===== */ 
+@media (max-width: 480px){ 
+    .envelope{
+         transform: scale(0.8);
+    }
+}
+/* ===== HINT TEXT UNDER ENVELOPE ===== */
+.hint {
+    font-family: cursive;
+    font-size: 16pt;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-align: center;
+
+    margin-top: 10px; /* space below envelope */
+    pointer-events: none; /* optional: clicks go through */
+
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Optional: hide hint when envelope opens */
+.flap + .hint {
+    opacity: 0;
+}
+@media (max-width: 480px){
+    .hint {
+        font-size: 12px;
+        margin-top: 6px;
+    }
+}
+
+ 
