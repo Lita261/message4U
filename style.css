@@ -178,7 +178,7 @@ body::before{
 /* ===== HINT TEXT UNDER ENVELOPE ===== */
 .hint {
     font-family: cursive;
-    font-size: 16pt;
+    font-size: 20pt;
     color: rgb(255, 255, 255);
     font-weight: bold;
     text-align: center;
@@ -200,5 +200,6 @@ body::before{
         margin-top: 6px;
     }
 }
+
 
  
